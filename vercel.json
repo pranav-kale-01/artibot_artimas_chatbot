@@ -1,0 +1,13 @@
+{
+    "builds": [{
+        "src" : "artibot_backend/wsgi.py",
+        "use" : "@vercel/python",
+        "config" : {"maxLambdaSize" : "15mb", "runtime" : "python3.6.8"}
+    }],
+    "routes" : [
+        {
+            "src" : "/(.*)",
+            "dest" : "artibot_backend/wsgi.py"
+        }
+    ]
+}
