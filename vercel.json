@@ -2,7 +2,7 @@
     "builds": [{
         "src" : "artibot_backend/wsgi.py",
         "use" : "@vercel/python",
-        "config" : {"maxLambdaSize" : "15mb", "runtime" : "python 3.6.8"}
+        "config" : {"maxLambdaSize" : "15mb", "runtime" : "python3.6"}
     }],
     "routes" : [
         {
