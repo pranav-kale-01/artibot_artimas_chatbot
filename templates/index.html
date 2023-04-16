@@ -1,0 +1,497 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    <title>Artimas Chatbot</title>
+    <link rel="stylesheet" href="{% static 'style2.css' %}"">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <script src="https://kit.fontawesome.com/6a16da35b6.js" crossorigin="anonymous"></script>
+    <script>
+        function redirectToPage() {
+            window.location = "{% url 'chatbot' %}";
+        }
+    </script>
+
+</head>
+
+<body>
+    <!-- <h1>Hello, world!</h1> -->
+
+    <!-- Optional JavaScript; choose one of the two! -->
+
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <!-- Option 2: Separate Popper and Bootstrap JS -->
+    <!--
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js" integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js" integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF" crossorigin="anonymous"></script>
+    -->
+
+
+    <!-- navbar -->
+    <style>
+        .cont {
+            width: 100%;
+            height: 95vh;
+
+            /* border: 2px solid red; */
+            background: url("{% static 'ai-cyberspace.jpg' %}");
+            background-repeat: no-repeat;
+            background-size: cover;
+
+
+        }
+
+        .cont-right {
+            width: 45%;
+            height: fit-content;
+            border: 2px solid black;
+            margin-left: 50%;
+            /* margin-top:10% */
+        }
+
+        body {
+            background-color: black;
+        }
+
+        .head {
+            font-size: 70px;
+            color: white;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        .info {
+            color: #dfc1c1; 
+            padding-left: 49px;
+            font-size: medium;
+            font-weight: bold;
+        }
+
+        .glow-on-hover {
+            width: 220px;
+            height: 50px;
+            border: none;
+            outline: none;
+            color: #fff;
+            background: #111;
+            cursor: pointer;
+            position: relative;
+            z-index: 0;
+            border-radius: 10px;
+        }
+
+        .glow-on-hover:before {
+            content: '';
+            background: linear-gradient(45deg, #ff0000, #ff7300, #fffb00, #48ff00, #00ffd5, #002bff, #7a00ff, #ff00c8, #ff0000);
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            background-size: 100%;
+            z-index: -1;
+            filter: blur(5px);
+            width: calc(100% + 4px);
+            height: calc(100% + 4px);
+            animation: glowing 20s linear infinite;
+            opacity: 0;
+            transition: opacity .3s ease-in-out;
+            border-radius: 10px;
+        }
+
+        .glow-on-hover:active {
+            color: #000
+        }
+
+        .glow-on-hover:active:after {
+            background: transparent;
+        }
+
+        .glow-on-hover:hover:before {
+            opacity: 1;
+        }
+
+        .glow-on-hover:after {
+            z-index: -1;
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: #111;
+            left: 0;
+            top: 0;
+            border-radius: 10px;
+        }
+
+        @keyframes glowing {
+            0% {
+                background-position: 0 0;
+            }
+
+            50% {
+                background-position: 400% 0;
+            }
+
+            100% {
+                background-position: 0 0;
+            }
+        }
+
+        .info button {
+            margin-left: 40%;
+        }
+    </style>
+    <div class="cont">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark ">
+            <div class="container-fluid">
+                <a class="navbar-brand" href="#"> <img src="{% static 'chat_logo.png' %}" alt="" width="30" height="24"
+                        class="d-inline-block align-text-top">
+                    ARTIMUS CHATBOT
+                </a>
+                <button class="navbar-toggler btn btn-outline-dark " type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse justify-content-center" id="navbarSupportedContent">
+                    <ul class="navbar-nav mb-2 mb-lg-0">
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page" href="#">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" target="_blank" href="http://www.pccoepune.com/">PCCOE</a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" target="_blank" href="https://pccoeaimsa.org" id="navbarDropdown" role="button"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                Artimus
+                            </a>
+                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <li><a class="dropdown-item" target="_blank" href="https://pccoeaimsa.org">Events</a></li>
+                                <li><a class="dropdown-item" target="_blank" href="https://pccoeaimsa.org">Team</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" target="_blank" href="https://pccoeaimsa.org">Connect</a></li>
+                            </ul>
+                        </li>
+                        <!-- <li class="nav-item">
+                    <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                  </li> -->
+                    </ul>
+                    <!-- <form class="d-flex">
+                  <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success justify-content-end" type="submit">Search</button>
+                </form> -->
+                </div>
+            </div>
+        </nav>
+        <div class="cont-right">
+            <p class="head">
+                Your Intelligent <br> Chat Companian
+            <p>
+            <div class="info">
+                <p class="info">
+                    Using the chatbot to get information on Artemis events is a great way to stay up-to-date with the
+                    latest happenings in the world of technology and space exploration. You can get information on
+                    events such as coding workshops, hackathons, and other tech-related events.
+                </p>
+                <button class="glow-on-hover" type="button" id="try-chat1" onclick="redirectToPage()">Try Chat-Bot</button>
+            </div>
+
+
+        </div>
+
+    </div>
+
+
+    <style>
+        .cont-2 {
+            width: 100%;
+            height: fit-content;
+
+        }
+
+        .cont-2-head p {
+            color: white;
+            text-align: center;
+            display: inline-block;
+            display: flex;
+            flex-wrap: wrap;
+            flex-direction: row;
+
+        }
+
+        .info-img {
+            width: 40%;
+            height: 300px;
+            border: 2px solid red;
+            justify-items: left;
+            align-items: flex-end;
+            margin-left: 55%;
+        }
+
+        .info-content {
+            width: 50px;
+            height: fit-content;
+            margin-top: 10%;
+        }
+
+        .parent {
+            border: 1px solid black;
+            /* margin: 1rem; */
+            /* padding: 2rem 2rem;    */
+
+            text-align: center;
+        }
+
+        .child_1 {
+            display: inline-block;
+            border: 1px solid rgb(15, 15, 15);
+            /* padding: 1rem 1rem; */
+            vertical-align: middle;
+            width: 40%;
+
+        }
+
+        .child_2 {
+            display: inline-block;
+            width: 40%;
+            border: 2px solid red;
+            ;
+        }
+
+        .info {
+            color: #dfc1c1;
+            padding-left: 49px;
+            font-size: large;
+            font-weight: bold;
+            margin-top: 10%;
+        }
+
+        .next-div {
+            width: 100%;
+            height: 2000px;
+            border: 2px solid rgb(69, 63, 63);
+        }
+
+        .next-div-left {
+            display: inline-block;
+            width: 300px;
+            height: fit-content;
+            border: 2px solid rgb(54, 52, 52);
+            color: white;
+            margin-top: 0%;
+            margin-left: 5%;
+        }
+
+        .next-div-left p {
+            font-size: 30px;
+        }
+
+        .next-div-right {
+            display: inline-block;
+            width: 32%;
+            height: 30%;
+            border: 2px solid red;
+            margin-left: 41%;
+            margin-top: 10%;
+        }
+
+        .next-div-left button {
+            margin-left: 8%;
+        }
+
+        .cont_video {
+            margin-left: 40%;
+        }
+
+        .sec-ii {
+            width: 80%;
+            height: fit-content;
+            border: 2px solid black;
+            display: inline-block;
+            display: flex;
+            flex-direction: row;
+
+        }
+
+        .sec-ii-cont p {
+            color: white;
+            font-size: 22px;
+            font-weight: 600;
+            margin-top: 66%;
+            display: inline-block;
+            width: 259px;
+            margin-left: 40%;
+            /* border: 2px solid rgb(168, 166, 166); */
+            padding: 20px 20px 20px 20px;
+            box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+        }
+
+        .head-sponsers img {
+            width: 100px;
+            margin: auto;
+
+        }
+
+        .sec-ii button {
+            margin-left: 40%;
+        }
+    </style>
+
+    <br>
+    <br>
+    <br>
+    <br>
+    <style>
+        .aimsa_info {
+            width: 80%;
+            margin-left: 10%;
+        }
+
+        .info-box {
+            width: 900px;
+            /* height: fit-content; */
+            /* border: 2px solid rgb(14, 13, 13); */
+            /* margin-left: 205px; */
+            margin: auto;
+            /* display: inline-flex; */
+
+            box-shadow: 3px 3px 16px 16px hsla(0, 3%, 13%, 0.36);
+        }
+
+        /* .info-box:hover {
+            transform: translateY(20px);
+        } */
+
+
+
+        .info-box p {
+            color: white;
+            font-size: large;
+            padding: 20px 20px 20px 20px;
+        }
+    </style>
+
+
+
+
+    <diV class="head-sponsers">
+        <p>Glimpse of Chat-Bot</p>
+    </diV>
+    <br>
+    <div class="aimsa_info">
+        <div class="info-box">
+            <p>To start, you can simply ask the chatbot, "What are the upcoming hackathons and coding events conducted
+                by Artemis?" The chatbot will then search its database and provide you with a list of all the upcoming
+                events that match your query.</p>
+        </div>
+        <div class="info-box">
+            <p>Additionally, the chatbot can provide you with personalized information about events based on your
+                location, interests, and availability. This can be especially helpful if you're looking for events in
+                your area or events that match your specific interests.</p>
+        </div>
+    </div>
+    <div class="sec-ii">
+        <div class="sec-ii-cont">
+            <p>Register for Artimas....<br>If any Doubts use our Chat Bot</p>
+            <button class="glow-on-hover" type="button">Register</button>
+            <br>
+            <br< /div><br>
+                <button class="glow-on-hover" type="button" onclick="redirectToPage()">Proceed to Chat Bot</button>
+
+        </div>
+        <!-- <div class="sec-ii-cont"><img src="artimas.png" alt="" srcset="">
+
+        </div> -->
+
+    </div>
+
+
+
+    <div class="cont_video">
+        <!-- <video width="320" height="240" controls>
+        <source src="Snapinsta.app_video_119971031_1275096859712466_7869848143464662433_n (1).mp4" type="video/mp4">
+        <source src="movie.ogg" type="video/ogg">
+      Your browser does not support the video tag.
+      </video> -->
+
+    </div>
+
+
+
+
+
+    <!-- ---------------------------------------------------------  Brands  ------------------------------------------------------->
+
+
+
+
+    <diV class="head-sponsers">
+        <p>Our Sponsers</p>
+    </diV>
+
+    <style>
+        .head-sponsers p {
+            text-align: center;
+            font-size: 30px;
+            margin-top: 5%;
+            color: white;
+
+        }
+    </style>
+    <div class="brands">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-5">
+                    <img src="{% static 'sp1.png' %}">
+                </div>
+                <div class="col-5">
+                    <img src="{% static 'sp2.png' %}">
+                </div>
+                <div class="col-5">
+                    <img src="{% static 'sp3.png' %}"">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+    <br>
+
+
+    <!-- ----footerrr------------ -->
+
+    <script>
+        var MenuItems = document.getElementById("MenuItems");
+        MenuItems.style.maxHeight = "0px";
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px";
+            }
+            else {
+                MenuItems.style.maxHeight = "0px";
+            }
+        }
+    </script>
+
+</body>
+
+</html>
