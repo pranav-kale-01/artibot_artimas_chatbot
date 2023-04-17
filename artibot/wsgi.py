@@ -1,5 +1,5 @@
 """
-WSGI config for artibot_backend project.
+WSGI config for artibot project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -11,7 +11,7 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'artibot_backend.settings')
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'artibot.settings')
 
 application = get_wsgi_application()
 app = application
