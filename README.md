@@ -28,7 +28,7 @@ Below is the list of all process that artibot currently supports:
 
 ## Steps to run the project 
 
-### Use python version 3.6.^, as chatterbot is supported by <a href="">python 3.6</a>.
+### Use python version 3.6.^, as chatterbot is supported by <a href="https://www.python.org/downloads/release/python-360/">python 3.6</a>.
 <br/>
 
 clone the repository using 
