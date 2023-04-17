@@ -6,6 +6,7 @@ from os.path import exists
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 import json
+from weather_logic import process_weather_information
 
 def train_csv( csv_file ): 
     # reading dataset 
@@ -22,17 +23,32 @@ def train_csv( csv_file ):
         if index == 1000: 
             break
 
+
+# this function would be called by django api CALL 
 @csrf_exempt
 def get_response_from_bot( request, *args, **kwargs ):
     if request.method == "POST":
         body_unicode = request.body.decode('utf-8')
         body_data = json.loads(body_unicode)
+        input_statement = body_data['input_text']    
+        additional_para = {}
+
+        print(body_data)
+
+        if( "index" in body_data ):
+            additional_para['index'] = body_data['index']
 
         # Get a response to an input statement
-        res_string = chatbot.get_response(body_data['input_text'])
-        response = JsonResponse( {'ans': str( res_string ) } )
+        res_string = chatbot.get_response(input_statement, additional_response_selection_parameters=additional_para)
+        response_body = {'ans': str( res_string ) }
 
-        return response
+        # if user wants to send an email then adding additional data in the response
+        if input_statement.lower().startswith('hey artibot') and ("send" in input_statement.lower() and "mail" in input_statement.lower()): 
+            response_body['index'] = body_data['index'] if 'index' in body_data else 0
+    
+        response_json = JsonResponse( response_body )
+
+        return response_json
 
 # flag to check if db exists so training is done only once
 db_exists = exists('db.sqlite3')
@@ -51,12 +67,6 @@ chatbot = ChatBot(
         {
             'import_path': 'custom_logic_adapter.CustomLogicAdapter'
         },
-        {
-            'import_path': 'chatterbot.logic.BestMatch',
-            'default_response': "I am sorry, I don't get it",
-            'maximum_similarity_threshold': 0.70
-        },
-        'chatterbot.logic.MathematicalEvaluation',      
     ]
 )
 

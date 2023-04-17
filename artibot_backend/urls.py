@@ -18,11 +18,12 @@ from django.contrib import admin
 from django.urls import path
 from backend_logic import get_response_from_bot
 from .views import index, chatbot
+import ocr_image
 
 urlpatterns = [
     path('', index, name="home" ),
     path('chatbot/', chatbot, name="chatbot"),
     path("artibot/", get_response_from_bot ),
     path('admin/', admin.site.urls),
-   
+    path('artibot/readimage', ocr_image.perfrom_ocr )
 ]
