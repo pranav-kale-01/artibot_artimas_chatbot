@@ -1,1 +1,0 @@
- web: gunicorn artibot_backend.wsgi --log-file -
