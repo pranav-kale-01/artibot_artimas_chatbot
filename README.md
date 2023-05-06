@@ -55,4 +55,4 @@ Once the server is running, you visit the site and try the chatbot
 localhost:8080/ 
 ```
 
-#### Note: the image upload functionality as of now is not working, we are trying our best to get it running as soon as possible. :)
+#### Note: the image upload functionality as of now is not working, we are trying our best to get it running as soon as possible.:)
